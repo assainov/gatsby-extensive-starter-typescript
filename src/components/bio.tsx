@@ -5,14 +5,30 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
+import * as React from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import Image, { FixedObject } from 'gatsby-image';
 
-import { rhythm } from "../utils/typography"
+import { rhythm } from '../utils/typography';
 
-const Bio = () => {
-  const data = useStaticQuery(graphql`
+interface IQuery {
+  avatar: {
+    childImageSharp: {
+      fixed: FixedObject;
+    };
+  };
+  site: {
+    siteMetadata: {
+      author: string;
+      social: {
+        twitter: string;
+      };
+    };
+  };
+}
+
+const Bio: React.FC = () => {
+  const data = useStaticQuery<IQuery>(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
         childImageSharp {
@@ -30,9 +46,9 @@ const Bio = () => {
         }
       }
     }
-  `)
+  `);
 
-  const { author, social } = data.site.siteMetadata
+  const { author, social } = data.site.siteMetadata;
   return (
     <div
       style={{
@@ -54,15 +70,12 @@ const Bio = () => {
         }}
       />
       <p>
-        Written by <strong>{author}</strong> who lives and works in San
-        Francisco building useful things.
+        Written by <strong>{author}</strong> who lives and works in San Francisco building useful things.
         {` `}
-        <a href={`https://twitter.com/${social.twitter}`}>
-          You should follow him on Twitter
-        </a>
+        <a href={`https://twitter.com/${social.twitter}`}>You should follow him on Twitter</a>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default Bio
+export default Bio;

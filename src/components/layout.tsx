@@ -1,15 +1,22 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react';
+import { Link } from 'gatsby';
+import { WindowLocation } from '@reach/router';
 
-import { rhythm, scale } from "../utils/typography"
+import { rhythm, scale } from '../utils/typography';
 
-class Layout extends React.Component {
-  render() {
-    const { location, title, children } = this.props
-    const rootPath = `${__PATH_PREFIX__}/`
-    let header
+interface IProps {
+  location?: WindowLocation;
+  title: string;
+}
 
-    if (location.pathname === rootPath) {
+class Layout extends React.Component<IProps> {
+  render(): JSX.Element {
+    const { location, title, children } = this.props;
+    const pathPrefix: string | null = window ? (window as any).__PATH_PREFIX__ : ''; // eslint-disable-line
+    const rootPath = `${pathPrefix}/`;
+    let header;
+
+    if (location && location.pathname === rootPath) {
       header = (
         <h1
           style={{
@@ -29,7 +36,7 @@ class Layout extends React.Component {
             {title}
           </Link>
         </h1>
-      )
+      );
     } else {
       header = (
         <h3
@@ -49,7 +56,7 @@ class Layout extends React.Component {
             {title}
           </Link>
         </h3>
-      )
+      );
     }
     return (
       <div
@@ -68,8 +75,8 @@ class Layout extends React.Component {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
-    )
+    );
   }
 }
 
-export default Layout
+export default Layout;
