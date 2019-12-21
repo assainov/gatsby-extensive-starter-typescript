@@ -43,10 +43,11 @@ npm run build
 
 ## 🧐 What's inside?
 
-- TypeScript for all the Gatsby and React code
+- TypeScript for **all** Gatsby and React files
 - Linting with ESLint & Prettier
 - Plugin for SASS/SASS modules
-- 
+- Automatic generation of GraphQL query interfaces
+- GraphQL query result validation with DeepPropertyAccess
 
 A quick look at the top-level files and directories you'll see in a Gatsby + TypeScript project.
 
