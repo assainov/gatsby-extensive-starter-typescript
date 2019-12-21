@@ -76,5 +76,9 @@ export default {
       },
     },
     `gatsby-plugin-typescript`,
+    {
+      resolve: 'gatsby-plugin-codegen',
+      options: {},
+    },
   ],
 };

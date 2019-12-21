@@ -7,28 +7,15 @@
 
 import * as React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import Image, { FixedObject } from 'gatsby-image';
+import Image from 'gatsby-image';
 
 import { rhythm } from '../utils/typography';
-
-interface IQuery {
-  avatar: {
-    childImageSharp: {
-      fixed: FixedObject;
-    };
-  };
-  site: {
-    siteMetadata: {
-      author: string;
-      social: {
-        twitter: string;
-      };
-    };
-  };
-}
+import { BioQuery } from './__generated__/BioQuery';
+import { DeepPropertyAccess } from '../utils/deep-property-access';
+import labels from '../../content/website/labels';
 
 const Bio: React.FC = () => {
-  const data = useStaticQuery<IQuery>(graphql`
+  const data = useStaticQuery<BioQuery>(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
         childImageSharp {
@@ -48,7 +35,15 @@ const Bio: React.FC = () => {
     }
   `);
 
-  const { author, social } = data.site.siteMetadata;
+  const author = DeepPropertyAccess.get(data, 'site', 'siteMetadata', 'author') || labels.notAvailable;
+  const twitter = DeepPropertyAccess.get(data, 'site', 'siteMetadata', 'social', 'twitter') || labels.notAvailable;
+  const { width, height, src, srcSet } = {
+    width: DeepPropertyAccess.get(data, 'avatar', 'childImageSharp', 'fixed', 'width') || 0,
+    height: DeepPropertyAccess.get(data, 'avatar', 'childImageSharp', 'fixed', 'height') || 0,
+    src: DeepPropertyAccess.get(data, 'avatar', 'childImageSharp', 'fixed', 'src') || labels.notAvailable,
+    srcSet: DeepPropertyAccess.get(data, 'avatar', 'childImageSharp', 'fixed', 'srcSet') || labels.notAvailable,
+  };
+
   return (
     <div
       style={{
@@ -57,7 +52,7 @@ const Bio: React.FC = () => {
       }}
     >
       <Image
-        fixed={data.avatar.childImageSharp.fixed}
+        fixed={{ width, height, src, srcSet }}
         alt={author}
         style={{
           marginRight: rhythm(1 / 2),
@@ -72,7 +67,7 @@ const Bio: React.FC = () => {
       <p>
         Written by <strong>{author}</strong> who lives and works in San Francisco building useful things.
         {` `}
-        <a href={`https://twitter.com/${social.twitter}`}>You should follow him on Twitter</a>
+        <a href={`https://twitter.com/${twitter}`}>You should follow him on Twitter</a>
       </p>
     </div>
   );

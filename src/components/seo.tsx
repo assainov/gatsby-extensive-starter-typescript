@@ -9,6 +9,10 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
+import { SeoQuery } from './__generated__/SeoQuery';
+import { DeepPropertyAccess } from '../utils/deep-property-access';
+import labels from '../../content/website/labels';
+
 interface IProps {
   description?: string;
   lang?: string;
@@ -16,20 +20,10 @@ interface IProps {
   title: string;
 }
 
-interface IQuery {
-  site: {
-    siteMetadata: {
-      title: string;
-      description: string;
-      author: string;
-    };
-  };
-}
-
 const SEO: React.FC<IProps> = ({ description = ``, lang = `en`, meta = [], title }) => {
-  const { site } = useStaticQuery<IQuery>(
+  const data = useStaticQuery<SeoQuery>(
     graphql`
-      query {
+      query SeoQuery {
         site {
           siteMetadata {
             title
@@ -41,8 +35,12 @@ const SEO: React.FC<IProps> = ({ description = ``, lang = `en`, meta = [], title
     `,
   );
 
-  const metaDescription = description || site.siteMetadata.description;
-  const pageTitle = title || site.siteMetadata.title;
+  const siteDescription = DeepPropertyAccess.get(data, 'site', 'siteMetadata', 'description') || labels.notAvailable;
+  const siteTitle = DeepPropertyAccess.get(data, 'site', 'siteMetadata', 'title') || labels.notAvailable;
+  const siteAuthor = DeepPropertyAccess.get(data, 'site', 'siteMetadata', 'author') || labels.notAvailable;
+
+  const metaDescription = description || siteDescription;
+  const pageTitle = title || siteTitle;
 
   return (
     <Helmet
@@ -50,7 +48,7 @@ const SEO: React.FC<IProps> = ({ description = ``, lang = `en`, meta = [], title
         lang,
       }}
       title={pageTitle}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${siteTitle}`}
       meta={[
         {
           name: `description`,
@@ -74,7 +72,7 @@ const SEO: React.FC<IProps> = ({ description = ``, lang = `en`, meta = [], title
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: siteAuthor,
         },
         {
           name: `twitter:title`,

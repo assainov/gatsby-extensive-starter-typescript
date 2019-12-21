@@ -78,7 +78,7 @@ interface INode {
 }
 
 export const pageQuery = graphql`
-  query {
+  query HomePageQuery {
     site {
       siteMetadata {
         title

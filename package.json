@@ -1,15 +1,16 @@
 {
-  "name": "gatsby-starter-typescript",
+  "name": "gatsby-starter-blog-typescript",
   "private": false,
   "description": "A typescript starter for a blog powered by Gatsby and Markdown",
   "version": "1.0.0",
   "author": "Ilyas Assainov <iliyas.assainov@gmail.com>",
   "bugs": {
-    "url": "https://github.com/assainov/gatsby-starter-typescript/issues"
+    "url": "https://github.com/assainov/gatsby-starter-blog-typescript/issues"
   },
   "dependencies": {
     "gatsby": "^2.18.12",
     "gatsby-image": "^2.2.34",
+    "gatsby-plugin-codegen": "^1.0.10",
     "gatsby-plugin-feed": "^2.3.23",
     "gatsby-plugin-google-analytics": "^2.1.29",
     "gatsby-plugin-manifest": "^2.2.31",
@@ -55,7 +56,7 @@
     "ts-node": "^8.5.4",
     "typescript": "^3.7.3"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://github.com/assainov/gatsby-starter-blog-typescript#readme",
   "keywords": [
     "gatsby"
   ],
@@ -63,7 +64,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/assainov/gatsby-starter-blog-typescript.git"
   },
   "scripts": {
     "build": "gatsby build",

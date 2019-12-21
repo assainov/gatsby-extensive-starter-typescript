@@ -12,7 +12,7 @@ interface IProps {
 class Layout extends React.Component<IProps> {
   render(): JSX.Element {
     const { location, title, children } = this.props;
-    const pathPrefix: string | null = window ? (window as any).__PATH_PREFIX__ : ''; // eslint-disable-line
+    const pathPrefix: string | null = typeof window !== 'undefined' ? (window as any).__PATH_PREFIX__ : ''; // eslint-disable-line
     const rootPath = `${pathPrefix}/`;
     let header;
 
