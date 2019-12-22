@@ -35,11 +35,11 @@ _Have anything to add to this boilerplate? Just create an issue._
 
 4.  **Build the static website**
 
-Navigate into your new site’s directory and start it up.
+    Navigate into your new site’s directory and start it up.
 
-```shell
-npm run build
-```
+    ```shell
+    npm run build
+    ```
 
 ## 🧐 What's inside?
 
@@ -47,7 +47,7 @@ npm run build
 - Linting with ESLint & Prettier
 - Plugin for SASS/SASS modules
 - Automatic generation of GraphQL query interfaces
-- GraphQL query result validation with [DeepPropertyAccess](https://github.com/assainov/gatsby-extensive-starter-typescript/blob/master/src/utils/deep-property-access.ts) and default props. Check the [example component](https://github.com/assainov/gatsby-extensive-starter-typescript/blob/master/src/components/bio.ts).
+- GraphQL query result validation with [DeepPropertyAccess](https://github.com/assainov/gatsby-extensive-starter-typescript/blob/master/src/utils/deep-property-access.ts) and default props. Check the [example Bio component](https://github.com/assainov/gatsby-extensive-starter-typescript/blob/master/src/components/bio.tsx).
 
 A quick look at the top-level files and directories you'll see in a Gatsby + TypeScript project.
 
