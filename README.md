@@ -1,8 +1,8 @@
 <h1 align="center">
-  Gatsby's blog starter written in TypeScript
+  Extensive TypeScript Starter for Gatsby
 </h1>
 
-This starter is based on my comprehensive tutorial series on how to [Migrate Gatsby Site to TypeScript](https://extensive.one/migrating-gatsby-to-typescript/).
+This starter is based on my comprehensive tutorial series on [Migrating Gatsby Site to TypeScript](https://extensive.one/migrating-gatsby-to-typescript-series/).
 
 The TypeScript boilerplate is converted from the popular gatsby-starter-blog.
 
@@ -47,7 +47,7 @@ npm run build
 - Linting with ESLint & Prettier
 - Plugin for SASS/SASS modules
 - Automatic generation of GraphQL query interfaces
-- GraphQL query result validation with [DeepPropertyAccess](https://github.com/assainov/gatsby-starter-blog-typescript/blob/master/src/utils/deep-property-access.ts) and default props. Check the [example component](https://github.com/assainov/gatsby-starter-blog-typescript/blob/master/src/components/bio.ts).
+- GraphQL query result validation with [DeepPropertyAccess](https://github.com/assainov/gatsby-extensive-starter-typescript/blob/master/src/utils/deep-property-access.ts) and default props. Check the [example component](https://github.com/assainov/gatsby-extensive-starter-typescript/blob/master/src/components/bio.ts).
 
 A quick look at the top-level files and directories you'll see in a Gatsby + TypeScript project.
 
