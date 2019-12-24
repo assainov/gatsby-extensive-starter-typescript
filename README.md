@@ -2,7 +2,7 @@
   Extensive TypeScript Starter for Gatsby
 </h1>
 
-This starter is based on my comprehensive tutorial series on [Migrating Gatsby Site to TypeScript](https://www.extensive.one/migrating-gatsby-to-typescript-part-0-introduction/).
+This starter is based on my comprehensive tutorial series on [Migrating Gatsby Site to TypeScript](https://www.extensive.one/migrating-gatsby-to-typescript-introduction/).
 
 The TypeScript boilerplate is converted from the popular gatsby-starter-blog.
 
