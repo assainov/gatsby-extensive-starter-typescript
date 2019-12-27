@@ -6,37 +6,49 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import { rhythm } from '../utils/typography';
 import { IPageProps } from '../types/page-props';
+import { DeepPropertyAccess } from '../utils/deep-property-access';
+import labels from '../../content/website/labels';
+import { HomePageQuery } from './__generated__/HomePageQuery';
+
+const { get } = DeepPropertyAccess;
 
 class BlogIndex extends React.Component<IPageQuery & IPageProps> {
   render(): JSX.Element {
     const { data } = this.props;
-    const siteTitle = data.site.siteMetadata.title;
-    const posts = data.allMarkdownRemark.edges;
+
+    const siteTitle = get(data, 'site', 'siteMetadata', 'title') || labels.notAvailable;
+
+    const posts = get(data, 'allMarkdownRemark', 'edges') || [];
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title="All posts" />
         <Bio />
         {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug;
+          const title = get(node, 'frontmatter', 'title') || get(node, 'fields', 'slug') || labels.notAvailable,
+            slug = get(node, 'fields', 'slug') || labels.notAvailable,
+            date = get(node, 'frontmatter', 'date') || labels.notAvailable,
+            description = get(node, 'frontmatter', 'description') || '',
+            excerpt = get(node, 'excerpt') || labels.notAvailable;
+
           return (
-            <article key={node.fields.slug}>
+            <article key={slug}>
               <header>
                 <h3
                   style={{
                     marginBottom: rhythm(1 / 4),
                   }}
                 >
-                  <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                  <Link style={{ boxShadow: `none` }} to={slug}>
                     {title}
                   </Link>
                 </h3>
-                <small>{node.frontmatter.date}</small>
+                <small>{date}</small>
               </header>
               <section>
                 <p
                   dangerouslySetInnerHTML={{
-                    __html: node.frontmatter.description || node.excerpt,
+                    __html: description || excerpt,
                   }}
                 />
               </section>
@@ -51,30 +63,7 @@ class BlogIndex extends React.Component<IPageQuery & IPageProps> {
 export default BlogIndex;
 
 interface IPageQuery {
-  data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
-    allMarkdownRemark: {
-      edges: {
-        node: INode;
-      }[];
-    };
-  };
-}
-
-interface INode {
-  excerpt: string;
-  fields: {
-    slug: string;
-  };
-  frontmatter: {
-    date: string;
-    title: string;
-    description: string;
-  };
+  data: HomePageQuery;
 }
 
 export const pageQuery = graphql`

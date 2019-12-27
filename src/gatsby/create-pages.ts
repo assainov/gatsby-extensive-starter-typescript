@@ -1,20 +1,20 @@
 import { GatsbyNode } from 'gatsby';
 import * as path from 'path';
 
-export interface INode {
-  fields: {
-    slug: string;
-  };
-  frontmatter: {
-    title: string;
+export interface IEdge {
+  node: {
+    fields: {
+      slug: string;
+    };
+    frontmatter: {
+      title: string;
+    };
   };
 }
 
 interface IQueryResult {
   allMarkdownRemark: {
-    edges: {
-      node: INode;
-    }[];
+    edges: IEdge[];
   };
 }
 

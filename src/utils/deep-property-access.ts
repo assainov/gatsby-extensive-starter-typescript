@@ -91,4 +91,4 @@ const obj = {
 };
 
 const result = DeepPropertyAccess.get(obj, 'level6', 'level5', 'level4', 'level3', 'level2', 'level1');
-console.log(result);
+console.debug(result);
